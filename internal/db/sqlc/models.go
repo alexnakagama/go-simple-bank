@@ -5,12 +5,11 @@
 package db
 
 import (
-	"database/sql"
 	"time"
 )
 
 type Account struct {
-	ID        int32
+	ID        int64
 	Owner     string
 	Balance   int64
 	Currency  string
@@ -18,17 +17,17 @@ type Account struct {
 }
 
 type Entry struct {
-	ID        int32
-	AccountID sql.NullInt32
+	ID        int64
+	AccountID int64
 	// can be negative or positive
 	Amount    int64
 	CreatedAt interface{}
 }
 
 type Transfer struct {
-	ID            int32
-	FromAccountID sql.NullInt32
-	ToAccountID   sql.NullInt32
+	ID            int64
+	FromAccountID int64
+	ToAccountID   int64
 	// must be positive
 	Amount    int64
 	CreatedAt time.Time

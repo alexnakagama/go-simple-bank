@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createEntry = `-- name: CreateEntry :one
@@ -20,7 +19,7 @@ INSERT INTO entries (
 `
 
 type CreateEntryParams struct {
-	AccountID sql.NullInt32
+	AccountID int64
 	Amount    int64
 }
 
@@ -41,7 +40,7 @@ SELECT id, account_id, amount, created_at FROM entries
 WHERE id = $1 LIMIT 1
 `
 
-func (q *Queries) GetEntry(ctx context.Context, id int32) (Entry, error) {
+func (q *Queries) GetEntry(ctx context.Context, id int64) (Entry, error) {
 	row := q.db.QueryRowContext(ctx, getEntry, id)
 	var i Entry
 	err := row.Scan(
@@ -62,7 +61,7 @@ OFFSET $3
 `
 
 type ListEntriesParams struct {
-	AccountID sql.NullInt32
+	AccountID int64
 	Limit     int32
 	Offset    int32
 }
