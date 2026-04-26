@@ -1,6 +1,6 @@
 .PHONY: all build test run migrate createdb dropdb
 
-DB_SOURCE=postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable
+DB_SOURCE=postgresql://root:secret@localhost:5432/root?sslmode=disable
 
 all: build
 
