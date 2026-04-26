@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-const alphabet = "abcdefghijklmnñopqrstuvwxyz"
+const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 func init() {
 	rand.New(rand.NewSource(1))
