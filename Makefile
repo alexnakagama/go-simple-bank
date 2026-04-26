@@ -14,7 +14,7 @@ run:
 	DB_SOURCE=$(DB_SOURCE) go run main.go
 
 migrate:
-	migrate -path db/migrations -database "$(DB_SOURCE)" -verbose up
+	migrate -path internal/db/migrations -database "$(DB_SOURCE)" -verbose up
 
 createdb:
 	createdb -U root simple_bank
