@@ -6,6 +6,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/alexnakagama/go-simple-bank/config"
 	_ "github.com/lib/pq"
 )
 
@@ -13,9 +14,12 @@ var testQueries *Queries
 var testDB *sql.DB
 
 func TestMain(m *testing.M) {
-	var err error
+	config, err := config.LoadConfig("../..")
+	if err != nil {
+		log.Fatal("cannot load config:", err)
+	}
 
-	testDB, err = sql.Open("postgres", os.Getenv("DB_SOURCE"))
+	testDB, err = sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
 		log.Fatal("cannot connect to database:", err)
 	}

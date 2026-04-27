@@ -3,30 +3,28 @@ package main
 import (
 	"database/sql"
 	"log"
-	"os"
 
+	"github.com/alexnakagama/go-simple-bank/config"
 	"github.com/alexnakagama/go-simple-bank/internal/api"
 	db "github.com/alexnakagama/go-simple-bank/internal/db/sqlc"
-	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 func main() {
-	err := godotenv.Load()
+	config, err := config.LoadConfig(".")
 	if err != nil {
-		log.Fatal("cannot load .env file:", err)
+		log.Fatal("cannot load config file:", err)
 	}
-	dbSource := os.Getenv("DB_SOURCE")
 
-	sqlDB, err := sql.Open("postgres", dbSource)
+	conn, err := sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
 		log.Fatal("cannot connect to db:", err)
 	}
 
-	store := db.NewStore(sqlDB)
+	store := db.NewStore(conn)
 	server := api.NewServer(store)
 
-	if err := server.Start(":8080"); err != nil {
+	if err := server.Start(config.ServerAddress); err != nil {
 		log.Fatal("cannot start server:", err)
 	}
 }
