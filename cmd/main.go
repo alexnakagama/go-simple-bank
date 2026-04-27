@@ -4,10 +4,11 @@ import (
 	"database/sql"
 	"log"
 	"os"
+
 	"github.com/alexnakagama/go-simple-bank/internal/api"
 	db "github.com/alexnakagama/go-simple-bank/internal/db/sqlc"
-	_ "github.com/lib/pq"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 )
 
 func main() {
