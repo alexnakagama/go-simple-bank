@@ -21,7 +21,7 @@ type Entry struct {
 	AccountID int64
 	// can be negative or positive
 	Amount    int64
-	CreatedAt interface{}
+	CreatedAt time.Time
 }
 
 type Transfer struct {

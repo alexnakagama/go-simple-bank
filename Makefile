@@ -1,4 +1,4 @@
-.PHONY: all build test run migrate createdb dropdb
+.PHONY: all build test run migrate createdb dropdb mock
 
 DB_SOURCE=postgresql://root:secret@localhost:5432/root?sslmode=disable
 
@@ -21,3 +21,6 @@ createdb:
 
 dropdb:
 	dropdb -U root simple_bank
+
+mock:
+	mockgen -package mockdb -destination internal/db/mock/store.go github.com//db.Store
