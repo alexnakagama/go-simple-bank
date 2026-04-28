@@ -1,6 +1,3 @@
-go-simple-bank/README.md
-```
-
 # Go Simple Bank
 
 A robust, modular, and production-ready RESTful API for simple banking operations, built with Go, PostgreSQL, and Gin. This project demonstrates best practices in Go architecture, configuration management, database migrations, and testing.
