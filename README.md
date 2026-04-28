@@ -54,7 +54,6 @@ A robust, modular, and production-ready RESTful API for simple banking operation
 
 ## Project Structure
 
-```
 go-simple-bank/
 ├── cmd/                    # Application entrypoint (main.go)
 ├── config/                 # Configuration loading (config.go)
@@ -72,6 +71,25 @@ go-simple-bank/
 ├── go.mod / go.sum         # Go modules
 └── README.md               # Project documentation
 ```
+
+<pre>
+go-simple-bank/
+├── cmd/                    # Application entrypoint (main.go)
+├── config/                 # Configuration loading (config.go)
+├── internal/
+│   ├── api/                # HTTP handlers and routing
+│   └── db/
+│       ├── migrations/     # SQL migration files
+│       ├── query/          # Raw SQL queries for sqlc
+│       └── sqlc/           # sqlc-generated Go code and tests
+├── util/                   # Utility functions
+├── .env                    # Environment variables
+├── docker-compose.yml      # Local development stack
+├── Makefile                # Common development commands
+├── sqlc.yaml               # sqlc configuration
+├── go.mod / go.sum         # Go modules
+└── README.md               # Project documentation
+</pre>
 
 ---
 
