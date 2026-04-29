@@ -32,4 +32,4 @@ dropdb:
 	dropdb -U root simple_bank
 
 mock:
-	mockgen -package mockdb -destination internal/db/mock/store.go github.com//db.Store
+	mockgen -package mock_db -destination internal/db/mock/store.go github.com/alexnakagama/go-simple-bank/internal/db/sqlc Store
