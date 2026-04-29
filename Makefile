@@ -1,4 +1,4 @@
-.PHONY: all build test run migrate createdb dropdb mock
+.PHONY: all build test run migrate createdb dropdb mock migrate1 migratedown migratedown1
 
 DB_SOURCE=postgresql://root:secret@localhost:5432/root?sslmode=disable
 
@@ -15,6 +15,15 @@ run:
 
 migrate:
 	migrate -path internal/db/migrations -database "$(DB_SOURCE)" -verbose up
+
+migrate1:
+	migrate -path internal/db/migrations -database "$(DB_SOURCE)" -verbose up 1
+
+migratedown:
+	migrate -path internal/db/migrations -database "$(DB_SOURCE)" -verbose down
+
+migratedown1:
+	migrate -path internal/db/migrations -database "$(DB_SOURCE)" -verbose down 1
 
 createdb:
 	createdb -U root simple_bank
