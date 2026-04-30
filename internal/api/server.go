@@ -14,8 +14,8 @@ import (
 type Server struct {
 	config     config.Config
 	store      db.Store
-	tokenMaker token.Maker
-	router     *gin.Engine
+	TokenMaker token.Maker
+	Router     *gin.Engine
 }
 
 func NewServer(config config.Config, store db.Store) (*Server, error) {
@@ -27,7 +27,7 @@ func NewServer(config config.Config, store db.Store) (*Server, error) {
 	server := &Server{
 		config:     config,
 		store:      store,
-		tokenMaker: tokenMaker,
+		TokenMaker: tokenMaker,
 	}
 
 	v, ok := binding.Validator.Engine().(*validator.Validate)
@@ -51,11 +51,11 @@ func (s *Server) setupRouter() {
 
 	router.POST("/transfers", s.createTransfer)
 
-	s.router = router
+	s.Router = router
 }
 
 func (s *Server) Start(address string) error {
-	return s.router.Run(address)
+	return s.Router.Run(address)
 }
 
 func errorResponse(err error) gin.H {
