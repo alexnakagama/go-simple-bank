@@ -4,6 +4,224 @@ A robust, modular, and production-ready RESTful API for simple banking operation
 
 ---
 
+## Features
+
+- Layered Clean Architecture for maintainability and testability
+- JWT Authentication for secure endpoints
+- PostgreSQL with safe, type-checked queries via `sqlc`
+- Database migrations with `golang-migrate`
+- Comprehensive testing with mocks and coverage
+- Docker & Docker Compose for easy local development
+
+---
+
+## Tech Stack
+
+- Language: Go 1.25+
+- Web Framework: [Gin](https://github.com/gin-gonic/gin)
+- Database: PostgreSQL 15+
+- ORM/Queries: [sqlc](https://github.com/kyleconroy/sqlc)
+- Migrations: [golang-migrate](https://github.com/golang-migrate/migrate)
+- Config: [Viper](https://github.com/spf13/viper)
+- Testing: Go test, [Testify](https://github.com/stretchr/testify), [gomock](https://github.com/golang/mock)
+- Containerization: Docker, Docker Compose
+
+---
+
+## Architecture
+
+```
+go-simple-bank/
+├── cmd/                    # Application entrypoint (main.go)
+├── config/                 # Configuration loading (config.go)
+├── internal/
+│   ├── api/                # HTTP handlers and routing
+│   └── db/
+│       ├── migrations/     # SQL migration files
+│       ├── query/          # Raw SQL queries for sqlc
+│       └── sqlc/           # sqlc-generated Go code and tests
+├── util/                   # Utility functions (passwords, random, etc.)
+├── .env                    # Environment variables
+├── docker-compose.yml      # Local development stack
+├── Makefile                # Common development commands
+├── sqlc.yaml               # sqlc configuration
+├── go.mod / go.sum         # Go modules
+└── README.md               # Project documentation
+```
+
+Design Principles:
+- Separation of concerns: API, business logic, and data access are decoupled.
+- Environment-driven config: All settings via `.env` and Viper.
+- Type-safe DB access: All queries are generated and checked by `sqlc`.
+- Testability: Mocks and interfaces for all external dependencies.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Go 1.25+
+- Docker & Docker Compose
+- PostgreSQL client tools (`psql`, `createdb`, `dropdb`)
+
+### Clone the repository
+
+```sh
+git clone https://github.com/alexnakagama/go-simple-bank.git
+cd go-simple-bank
+```
+
+### Setup Environment
+
+Edit `app.env` as needed:
+
+```env
+DB_PORT=5432
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=secret
+DB_NAME=root
+DB_SOURCE=postgresql://root:secret@db:5432/root?sslmode=disable
+DB_DRIVER=postgres
+SERVER_ADDRESS=0.0.0.0:8080
+TOKEN_SYMMETRIC_KEY=your-32-char-key-here
+ACCESS_TOKEN_DURATION=15m
+```
+
+---
+
+## Running with Docker Compose
+
+```sh
+docker-compose up --build
+```
+
+This will start both the API and the PostgreSQL database.
+
+---
+
+## Database Migrations
+
+Run migrations with:
+
+```sh
+make migrate
+```
+
+Migration files are in `internal/db/migrations/`.
+
+---
+
+## SQL Code Generation
+
+- SQL queries: `internal/db/query/`
+- Generate Go code:  
+  ```sh
+  sqlc generate
+  ```
+
+---
+
+## Running the Server
+
+```sh
+go run ./cmd/main.go
+# or
+make run
+```
+
+---
+
+## API Endpoints
+
+### Authentication
+
+- `POST /users` — Register a new user
+- `POST /users/login` — Login and receive JWT
+
+### Accounts
+
+- `POST /accounts` — Create a new account
+- `GET /accounts/:id` — Get account by ID
+- `GET /accounts` — List accounts (pagination: `page_id`, `page_size`)
+
+### Example: Register & Login
+
+```sh
+curl -X POST http://localhost:8080/users \
+  -H "Content-Type: application/json" \
+  -d '{"username":"alice","password":"secret123","fullname":"Alice","email":"alice@example.com"}'
+
+curl -X POST http://localhost:8080/users/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"alice","password":"secret123"}'
+```
+
+### Example: Create Account
+
+```sh
+curl -X POST http://localhost:8080/accounts \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <your_token>" \
+  -d '{"currency": "USD"}'
+```
+
+---
+
+## Testing
+
+Run all tests:
+
+```sh
+make test
+# or
+go test -v ./...
+```
+
+- Tests use the same `.env` configuration.
+- Mocks are generated for DB and external dependencies.
+
+---
+
+## Development Workflow
+
+- Build: `make build`
+- Run: `make run`
+- Test: `make test`
+- Migrate DB: `make migrate`
+- Generate SQL code: `sqlc generate`
+
+---
+
+## Contributing
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/foo`)
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Note:  
+This project is structured for scalability, maintainability, and testability.  
+- All configuration is centralized and environment-driven.
+- Database access is type-safe and testable via sqlc.
+- The API layer is decoupled from the data layer.
+- All dependencies are managed via Go modules and Docker Compose for local development.
+
+
+A robust, modular, and production-ready RESTful API for simple banking operations, built with Go, PostgreSQL, and Gin. This project demonstrates best practices in Go architecture, configuration management, database migrations, and testing.
+
+---
+
 ## Table of Contents
 
 - [Tech Stack](#tech-stack)
