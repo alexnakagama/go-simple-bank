@@ -10,6 +10,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// Entry point of the application
 func main() {
 	config, err := config.LoadConfig(".")
 	if err != nil {
