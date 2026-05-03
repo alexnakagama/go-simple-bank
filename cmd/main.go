@@ -12,7 +12,7 @@ import (
 
 // Entry point of the application
 func main() {
-	config, err := config.LoadConfig(".")
+	config, err := config.LoadConfig(".", "app.test")
 	if err != nil {
 		log.Fatal("cannot load config file:", err)
 	}
