@@ -7,16 +7,17 @@ import (
 )
 
 type Config struct {
-	DBPort              string        `mapstructure:"DB_PORT"`
-	DBHost              string        `mapstructure:"DB_HOST"`
-	DBUser              string        `mapstructure:"DB_USER"`
-	DBPassword          string        `mapstructure:"DB_PASSWORD"`
-	DBName              string        `mapstructure:"DB_NAME"`
-	DBSource            string        `mapstructure:"DB_SOURCE"`
-	DBDriver            string        `mapstructure:"DB_DRIVER"`
-	ServerAddress       string        `mapstructure:"SERVER_ADDRESS"`
-	TokenSymmetricKey   string        `mapstructure:"TOKEN_SYMMETRIC_KEY"`
-	AccessTokenDuration time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
+	DBPort               string        `mapstructure:"DB_PORT"`
+	DBHost               string        `mapstructure:"DB_HOST"`
+	DBUser               string        `mapstructure:"DB_USER"`
+	DBPassword           string        `mapstructure:"DB_PASSWORD"`
+	DBName               string        `mapstructure:"DB_NAME"`
+	DBSource             string        `mapstructure:"DB_SOURCE"`
+	DBDriver             string        `mapstructure:"DB_DRIVER"`
+	ServerAddress        string        `mapstructure:"SERVER_ADDRESS"`
+	TokenSymmetricKey    string        `mapstructure:"TOKEN_SYMMETRIC_KEY"`
+	AccessTokenDuration  time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
+	RefreshTokenDuration time.Duration `mapstructure:"REFRESH_TOKEN_DURATION"`
 }
 
 // reads the configuration from the environment variables
