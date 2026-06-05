@@ -179,15 +179,6 @@ go test -v ./...
 
 ---
 
-## License
-
-This project is licensed under the MIT License.
-
-This project is structured for scalability, maintainability, and testability.  
-- All configuration is centralized and environment-driven.
-- Database access is type-safe and testable via sqlc.
-
-
 ## Table of Contents
 
 - [Tech Stack](#tech-stack)
